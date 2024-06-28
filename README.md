@@ -15,10 +15,8 @@ Once you are on the Remix website, create a new file by clicking on the "+" icon
 
 
 ```bash
-  // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
-
+  //SPDX-License-Identifier:MIT
+pragma solidity 0.8.26;
 /*
        REQUIREMENTS
     1. Your contract will have public variables that store the details about your coin (Token Name, Token Abbrv., Total Supply)
@@ -33,29 +31,32 @@ pragma solidity ^0.8.0;
        to the amount that is supposed to be burned.
 */
 
-contract MyToken {
-  
-    // public variables here
-    string public tokenname = "METACRAFTERS";
-    string public tokenabbrv ="MCS";
-    uint public totalsupply =0;
-    // mapping variable here
-    mapping(address => uint) public balances;
-    // mint function
-    function mint (address _add,uint _val) public{
-        totalsupply += _val;
-        balances[_add] += _val;      
-    }
-    // burn function
-    function burn (address _add,uint _val) public{
-        if (balances[_add]>=_val){
-            totalsupply -= _val;
-            balances[_add] -= _val;
 
-        }
-    }
+contract tokencontract { 
+   // public variables here
+
+    string public tokenName = "META";
+    string public tokenAbbrev = "MTA";
+    uint public totalSupply = 0;
+
+// mapping variable here
+  
+ mapping (address => uint) public balances;
+
+// mint function
+function mint (address _address, uint _value) public {
+ totalSupply += _value;
+ balances[_address] += _value;
 }
-```
+
+// burn function
+function burn (address _address, uint _value) public {
+   if (balances[_address] >= _value) {
+       totalSupply -= _value;
+     balances[_address] -= _value;
+   }
+}
+}
 
 To compile the code, click on the "Solidity Compiler" tab in the left-hand sidebar. Make sure the "Compiler" option is set to "0.8.0" (or another compatible version), and then click on the "Compile Assesment.sol" button.
 
